@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import headerImage from "../../assets/headerImage.png";
+import headerAdmin from "../../assets/headeradmin.png";
+
 
 
 export function Header({
@@ -51,9 +53,14 @@ export function Header({
                 navigate("/");
               }}
             >
+            {user.role === "admin" ? (
+              
+              <img src={headerAdmin} alt="" />
+            ) : (
               <img src={headerImage} alt="" />
+            )}
             </Logo>
-            {user.role == "admin" && <span>admin</span>}
+            
           </Admin>
 
           {isDesktop ? (
