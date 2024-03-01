@@ -12,7 +12,7 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import headerImage from "../../assets/headerImage.png";
 import headerAdmin from "../../assets/headeradmin.png";
-
+import { useAuth } from "../../hooks/auth";
 
 
 export function Header({
@@ -21,13 +21,18 @@ export function Header({
   handleCloseMenu,
   quantity,
   handleOpenModal,
-  user
+  
 }) {
   const navigate = useNavigate("");
 
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
   const [menu, setMenu] = useState(false);
+  const { signOut, user } = useAuth();
 
+  function handleSignOut() {
+    signOut();
+    navigate("/");
+  }
 
 
   return (
@@ -108,7 +113,7 @@ export function Header({
 
           {isDesktop ? (
             <Logout>
-              <FiLogOut />
+              <FiLogOut onClick={handleSignOut}/>
             </Logout>
           ) : (
             ""

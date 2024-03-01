@@ -30,10 +30,14 @@ import { BsSearch } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../Services/api";
+
 export function Home() {
   const isDesktop = useMediaQuery({ query: "(min-width: 1024px)" });
   const slidesToShow = isDesktop ? 3.5 : 1.65;
   const initialSlide = isDesktop ? 0 : 0;
+  const { signOut, user } = useAuth();
 
   const navigate = useNavigate("");
 
@@ -78,10 +82,6 @@ export function Home() {
       id: 6
     },
   ];
-  const user = {
-    name: 'João',
-    role: 'admin'
-  };
 
   const CustomArrow = ({ onClick, direction }) => (
     <div>
@@ -223,7 +223,6 @@ export function Home() {
         handleOpenModal={() => {
           setModal(true);
         }}
-        user={user}
       />
 
       {(!menu || isDesktop) && (

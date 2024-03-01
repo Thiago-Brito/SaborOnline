@@ -1,5 +1,4 @@
 import { Container, Logo, Form } from "./style";
-import { BsHexagonFill } from "react-icons/bs";
 import { Input } from "../../components/Input/Index";
 import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
@@ -7,13 +6,16 @@ import { useState } from "react";
 import PrimaryImage from "../../assets/PrimaryImage.png";
 import { useNavigate } from "react-router-dom";
 
+import { useAuth } from "../../hooks/auth";
+
 export function SingIn() {
-  
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassoword] = useState("");
   const navigate = useNavigate("");
-  function navigateHome(){
-    navigate("/home")
+  
+  async function handleSignIn() {
+    signIn({ email, password });
   }
 
   return (
@@ -39,7 +41,7 @@ export function SingIn() {
           onChange={(e) => setPassoword(e.target.value)}
         />
 
-        <Button type="button" onClick={navigateHome} title={"entrar"} />
+        <Button type="button" onClick={handleSignIn} title={"entrar"} />
         <Link to={"/register"}>Criar uma conta</Link>
       </Form>
     </Container>
